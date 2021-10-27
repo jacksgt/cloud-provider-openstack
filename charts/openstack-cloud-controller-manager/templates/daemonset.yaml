@@ -33,14 +33,15 @@ spec:
           image: "{{ .Values.image.repository }}:{{ default .Chart.AppVersion .Values.image.tag }}"
           args:
             - /bin/openstack-cloud-controller-manager
-            - --v=1
+            - --v={{ .Values.logLevel }}
             - --cloud-config=$(CLOUD_CONFIG)
             - --cloud-provider=openstack
             - --use-service-account-credentials=true
+            - '--controllers={{- trimAll "," (include "occm.enabledControllers" . ) -}}'
             {{- if .Values.serviceMonitor.enabled }}
-            - --address=0.0.0.0
+            - --bind-address=0.0.0.0
             {{- else }}
-            - --address=127.0.0.1
+            - --bind-address=127.0.0.1
             {{- end }}
             {{- if .Values.controllerExtraArgs }}
             {{- with .Values.controllerExtraArgs }}

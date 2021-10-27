@@ -46,6 +46,14 @@ controllerExtraArgs: {}
 # controllerExtraArgs: |-
 #   - --cluster-name=my-cluster
 
+enabledControllers:
+  - cloud-node
+  - cloud-node-lifecycle
+  - route
+  - service
+
+logLevel: 1
+
 # Create a service monitor for Prometheus Operator
 serviceMonitor: {}
 # serviceMonitor:

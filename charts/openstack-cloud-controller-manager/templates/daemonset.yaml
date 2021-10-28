@@ -64,8 +64,8 @@ spec:
             - mountPath: /etc/config
               name: cloud-config-volume
               readOnly: true
-            - mountPath: /usr/libexec/kubernetes/kubelet-plugins/volume/exec
-              name: flexvolume-dir
+            # - mountPath: /usr/libexec/kubernetes/kubelet-plugins/volume/exec
+            #   name: flexvolume-dir
           {{- if .Values.livenessProbe }}
           livenessProbe:
             {{- toYaml .Values.livenessProbe | nindent 12 }}
@@ -83,10 +83,10 @@ spec:
               value: /etc/config/cloud.conf
       hostNetwork: true
       volumes:
-      - hostPath:
-          path: /usr/libexec/kubernetes/kubelet-plugins/volume/exec
-          type: DirectoryOrCreate
-        name: flexvolume-dir
+      # - hostPath:
+      #     path: /usr/libexec/kubernetes/kubelet-plugins/volume/exec
+      #     type: DirectoryOrCreate
+      #   name: flexvolume-dir
       - hostPath:
           path: /etc/kubernetes/pki
           type: DirectoryOrCreate
